@@ -7,16 +7,13 @@
     <!-- TODO: Update blank fragment layout -->
 
 
-
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/editText"
-        android:hint="Mobile Number"
-        android:gravity="center"
-        />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/account"
+        android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"

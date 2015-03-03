@@ -32,8 +32,10 @@ public class SplashActivity extends ActionBarActivity implements LoginFrag.OnFra
         if (progress != null) {
             progress.setVisibility(View.VISIBLE);
             AnimationDrawable frameAnimation = (AnimationDrawable)progress.getDrawable();
-            frameAnimation.setCallback(progress);
-            frameAnimation.setVisible(true, true);
+            frameAnimation.start();
+            if(!frameAnimation.isRunning()){
+                progress.setImageResource(R.drawable.animmm);
+            }
         }
 
         new Handler().postDelayed(new Runnable() {
@@ -45,11 +47,9 @@ public class SplashActivity extends ActionBarActivity implements LoginFrag.OnFra
 
             @Override
             public void run() {
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoginFrag()).commit();
-
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoginFrag(getBaseContext())).commit();
             }
-        }, 5000);
+        }, 4000);
     }
 
     @Override
