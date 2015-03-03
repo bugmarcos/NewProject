@@ -1,5 +1,6 @@
 package com.foodapp.foodnearme;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.ImageView;
 
 
 public class SplashActivity extends ActionBarActivity implements LoginFrag.OnFragmentInteractionListener {
@@ -24,6 +26,14 @@ public class SplashActivity extends ActionBarActivity implements LoginFrag.OnFra
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
+        }
+
+        ImageView progress = (ImageView)findViewById(R.id.imageView);
+        if (progress != null) {
+            progress.setVisibility(View.VISIBLE);
+            AnimationDrawable frameAnimation = (AnimationDrawable)progress.getDrawable();
+            frameAnimation.setCallback(progress);
+            frameAnimation.setVisible(true, true);
         }
 
         new Handler().postDelayed(new Runnable() {
@@ -39,7 +49,7 @@ public class SplashActivity extends ActionBarActivity implements LoginFrag.OnFra
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoginFrag()).commit();
 
             }
-        }, 1000);
+        }, 5000);
     }
 
     @Override
