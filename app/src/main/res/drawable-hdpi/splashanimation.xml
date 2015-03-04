@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list 
-    android:oneshot="false"
+    android:oneshot="true"
     xmlns:android="http://schemas.android.com/apk/res/android" >
-
+    <item
+        android:drawable="@drawable/animmm"
+        android:duration="800"
+        >
+    </item>
     <item
         android:drawable="@drawable/ani"
         android:duration="1000"
@@ -10,18 +14,17 @@
     </item>
     <item
     android:drawable="@drawable/anim"
-    android:duration="2000"
+    android:duration="1500"
     >
     </item>
     <item
         android:drawable="@drawable/animm"
-        android:duration="3000"
-        >        
-    </item>    
-     <item
+        android:duration="2500"
+        >
+    </item>
+    <item
         android:drawable="@drawable/animmm"
-        android:duration="4000"
-        >        
-    </item>   
-
+        android:duration="3500"
+        >
+    </item>
 </animation-list>

@@ -21,5 +21,6 @@
             android:label="@string/title_activity_main" >
         </activity>
     </application>
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 </manifest>
