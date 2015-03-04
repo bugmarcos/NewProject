@@ -7,6 +7,16 @@
     <!-- TODO: Update blank fragment layout -->
 
 
+    <AutoCompleteTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="15"
+        android:id="@+id/emailLogin"
+        android:layout_gravity="center_horizontal"
+        android:singleLine="true"
+
+         />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

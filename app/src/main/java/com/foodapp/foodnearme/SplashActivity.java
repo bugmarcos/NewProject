@@ -23,6 +23,7 @@ public class SplashActivity extends ActionBarActivity implements LoginFrag.OnFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         if (savedInstanceState == null) {
+            getSupportActionBar().hide();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
@@ -47,6 +48,7 @@ public class SplashActivity extends ActionBarActivity implements LoginFrag.OnFra
 
             @Override
             public void run() {
+                getSupportActionBar().show();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoginFrag(getBaseContext())).commit();
             }
         }, 4000);

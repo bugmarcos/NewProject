@@ -9,15 +9,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.telephony.TelephonyManager;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Pattern;
 
 public class LoginFrag extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -80,13 +87,23 @@ public class LoginFrag extends Fragment {
         AccountManager am = AccountManager.get(context);
         Account[] accounts = am.getAccounts();
 
+        Pattern emailPattern = Patterns.EMAIL_ADDRESS;
+        Set<String> emailAdapter = new HashSet<String>();
         for (Account ac : accounts) {
             if(ac.type.equals("com.google"))
             {
                 TextView GmailAccount=(TextView)rootView.findViewById(R.id.account);
                 GmailAccount.setText(ac.name);
             }
+            if(emailPattern.matcher(ac.name).matches())
+            {
+                emailAdapter.add(ac.name);
+            }
         }
+
+        AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) rootView.findViewById(R.id.emailLogin);
+        autoCompleteTextView.setAdapter(new ArrayAdapter(context,android.R.layout.simple_dropdown_item_1line,emailAdapter.toArray()));
+
         LoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

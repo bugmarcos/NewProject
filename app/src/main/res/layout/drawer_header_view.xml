@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<FrameLayout
+    android:layout_height="wrap_content" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/material_bg"
+        android:scaleType="centerCrop"
+        android:id="@+id/imageView"
+        android:adjustViewBounds="true"/>-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="16dp" android:paddingLeft="16dp"
+    android:paddingTop="16dp" android:background="#ccc">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="left"
+        android:weightSum="3">
+
+
+        <view
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/hd_wallpaper_12600"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            class="com.foodapp.foodnearme.CircularImageView"
+            android:id="@+id/view" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Harsh Shah"
+            android:id="@+id/txtDrawerMainTitle" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="9558123499"
+            android:id="@+id/txtDrawerSubTitle" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+<!--
+</FrameLayout>-->

@@ -15,5 +15,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_example">Example action</string>
+
+    <color name="primColor">#4CAF50</color>
+    <color name="primDarkColor">#388E3C</color>
     <string name="testtext">Small Textassdd</string>
 </resources>

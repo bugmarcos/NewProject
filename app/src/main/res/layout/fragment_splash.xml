@@ -9,6 +9,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:src="@drawable/splashanimation"
-        android:gravity="center" />
+        android:src="@anim/splashanimation"
+        android:gravity="center"
+        android:visibility="gone"/>
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/new_logo"
+        android:background="@android:color/transparent"
+        />
 </LinearLayout>
