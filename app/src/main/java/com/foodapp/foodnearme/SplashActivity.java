@@ -1,8 +1,14 @@
 package com.foodapp.foodnearme;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Handler;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -12,86 +18,58 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.os.Build;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
-public class SplashActivity extends ActionBarActivity implements LoginFrag.OnFragmentInteractionListener {
+public class SplashActivity extends ActionBarActivity{
 
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        private Context context;
+        public ScreenSlidePagerAdapter(FragmentManager fm,Context c) {
+            super(fm);
+            context=c;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            AccountManager am = AccountManager.get(context);
+            Account[] accounts = am.getAccounts();
+            String email="";
+            for (Account ac : accounts) {
+                if(ac.type.equals("com.google"))
+                {
+                    email=ac.name;
+                }
+            }
+            Bundle bun=new Bundle();
+            bun.putInt("img",imgIds[position]);
+            bun.putString("email",email);
+            ScreenSlide sc=new ScreenSlide();
+            sc.setArguments(bun);
+            return sc;
+        }
+
+        @Override
+        public int getCount() {
+            return imgIds.length;
+        }
+    }
+
+    private static int[] imgIds=new int[]{R.drawable.anushka,R.drawable.karena,R.drawable.anushka,R.drawable.karena,R.drawable.anushka};
+    private ViewPager mPager;
+    private PagerAdapter mPagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
 
-        ImageView progress = (ImageView)findViewById(R.id.imageView);
-        if (progress != null) {
-            progress.setVisibility(View.VISIBLE);
-            AnimationDrawable frameAnimation = (AnimationDrawable)progress.getDrawable();
-            frameAnimation.start();
-            if(!frameAnimation.isRunning()){
-                progress.setImageResource(R.drawable.animmm);
-            }
-        }
-
-        new Handler().postDelayed(new Runnable() {
-
-            /*
-             * Showing splash screen with a timer. This will be useful when you
-             * want to show case your app logo / company
-             */
-
-            @Override
-            public void run() {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoginFrag(getBaseContext())).commit();
-            }
-        }, 4000);
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(),this.getBaseContext());
+        mPager.setAdapter(mPagerAdapter);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_splash, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_splash, container, false);
-            return rootView;
-        }
-    }
 }
