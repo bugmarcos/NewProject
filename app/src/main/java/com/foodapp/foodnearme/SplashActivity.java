@@ -48,7 +48,7 @@ public class SplashActivity extends ActionBarActivity implements LoginFrag.OnFra
 
             @Override
             public void run() {
-                getSupportActionBar().show();
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoginFrag(getBaseContext())).commit();
             }
         }, 4000);

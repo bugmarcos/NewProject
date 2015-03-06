@@ -25,5 +25,6 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
+    compile 'com.mcxiaoke.volley:library:1.0.11'
 
 }

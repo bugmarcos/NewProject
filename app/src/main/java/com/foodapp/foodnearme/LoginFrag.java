@@ -90,11 +90,6 @@ public class LoginFrag extends Fragment {
         Pattern emailPattern = Patterns.EMAIL_ADDRESS;
         Set<String> emailAdapter = new HashSet<String>();
         for (Account ac : accounts) {
-            if(ac.type.equals("com.google"))
-            {
-                TextView GmailAccount=(TextView)rootView.findViewById(R.id.account);
-                GmailAccount.setText(ac.name);
-            }
             if(emailPattern.matcher(ac.name).matches())
             {
                 emailAdapter.add(ac.name);
