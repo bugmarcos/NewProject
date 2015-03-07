@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context="com.foodapp.foodnearme.LoginFrag"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageView
+    <View
         android:layout_width="match_parent"
         android:layout_height="232dp"
         android:layout_weight="0"
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:text="Account Setup"
-        android:id="@+id/textView"
+        android:id="@+id/topHeaderText"
         android:textSize="18sp"
         android:paddingLeft="16dp"
         android:layout_gravity="center_horizontal"
@@ -27,82 +27,169 @@
         android:layout_height="48dp"
         android:id="@+id/bottomButtons"
         android:layout_alignParentBottom="true"
-        android:background="#eee"
+        android:background="@android:color/transparent"
         android:weightSum="3">
 
-        <FrameLayout
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="?android:attr/borderlessButtonStyle"
+            android:text=""
             android:layout_weight="1"
-            android:layout_gravity="center"
-            >
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_chevron_right_black_36dp"
-                android:id="@+id/textView3" />
-        </FrameLayout>
-        <LinearLayout
-            android:orientation="horizontal"
+            android:drawableLeft="@drawable/ic_chevron_left_black_36dp"
+            android:id="@+id/NavigationButtonLeft" />
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="Next"
             android:layout_weight="2"
-            android:gravity="right"
-            >
+            android:drawableRight="@drawable/ic_chevron_right_black_36dp"
+            android:id="@+id/NavigationButtonRight"
+
+            />
+
+    </LinearLayout>
+
+
+    <view
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:src="@drawable/hd_wallpaper_12600"
+        android:layout_margin="16dp"
+        class="com.foodapp.foodnearme.CircleImageView"
+        android:id="@+id/view2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ViewSwitcher
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/SwitchAcSetup"
+        android:layout_below="@+id/topheaderview"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/bottomButtons">
+        <LinearLayout
+
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:id="@+id/centerlayout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Food Near Me"
+                android:id="@+id/textView2" />
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:gravity="right"
-                android:layout_gravity="center_vertical"
-                android:id="@+id/textView2" />
-            <ImageButton
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:paddingTop="16dp"
+                android:text="Sign In to get the most out of our application."
+                android:id="@+id/infoTextview" />
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="15"
+                android:id="@+id/emailLogin"
+                android:layout_gravity="center_horizontal"
+                android:singleLine="true"
+                android:hint="Enter your email"
+                android:paddingTop="30dp"
+
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:ems="15"
+                android:id="@+id/nameLogin"
+                android:hint="Enter your Name"
+                android:visibility="gone"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:ems="15"
+                android:id="@+id/numberLogin"
+                android:hint="Enter your phone number"
+                android:visibility="gone"
+                />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_chevron_right_black_36dp"
-                android:id="@+id/textView4" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="OR CREATE A NEW ACCOUNT"
+                android:textAllCaps="true"
+                android:id="@+id/switchRegisterText"
+                android:autoLink="web"
+                android:textColor="@color/primDarkColor"
+                android:layout_marginTop="16dp"/>
+
+
         </LinearLayout>
-    </LinearLayout>
-<LinearLayout
+        <LinearLayout
 
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_below="@id/topheaderview"
-    android:gravity="center"
-    android:layout_above="@+id/bottomButtons"
-    android:id="@+id/centerlayout">
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:paddingTop="16dp"
+                android:text="Sign In to get the most out of our application."
+                android:visibility="gone"
+                 />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="15"
+                android:id="@+id/passwordEdt"
+                android:hint="Enter your password"
+
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="15"
+                android:hint="Reenter password to verify"
+                android:visibility="gone"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Forgot Password"
+                android:textAllCaps="true"
+
+                android:autoLink="web"
+                android:textColor="@color/primDarkColor"
+                android:layout_marginTop="16dp"/>
 
 
-    <AutoCompleteTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="15"
-        android:id="@+id/emailLogin"
-        android:layout_gravity="center_horizontal"
-        android:singleLine="true"
-        android:hint="Email id"
-         />
-
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="15"
-        android:id="@+id/passLogin"
-        android:hint="password"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/btnLogin"
-        android:visibility="gone"
-        />
-
-
-
-</LinearLayout>
+        </LinearLayout>
+        </ViewSwitcher>
 
 </RelativeLayout>

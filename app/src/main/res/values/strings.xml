@@ -16,8 +16,18 @@
 
     <string name="action_example">Example action</string>
 
+    //LoginFrag
+    <string name="login_to_register_text">OR CREATE A NEW ACCOUNT</string>
+    <string name="register_to_login_text">OR Log in to existing account</string>
+    <string name="login_info_text">Sign In to get the most out of our application.</string>
+    <string name="register_info_text">Sign Up to get the most out of our application.</string>
+
+    //Server
+    <string name="server_url_router">http://127.0.0.1/foodnearme/Router/router.php</string>
+
     <color name="primColor">#4CAF50</color>
     <color name="primDarkColor">#388E3C</color>
     <string name="testtext">Small Textassdd</string>
     <string name="lorem_ipsum">temp</string>
+    <string name="title_activity_gcmreg">GCMRegAct</string>
 </resources>

@@ -29,16 +29,6 @@ public class SplashActivity extends ActionBarActivity implements LoginFrag.OnFra
                     .commit();
         }
 
-        ImageView progress = (ImageView)findViewById(R.id.imageView);
-        if (progress != null) {
-            progress.setVisibility(View.VISIBLE);
-            AnimationDrawable frameAnimation = (AnimationDrawable)progress.getDrawable();
-            frameAnimation.start();
-            if(!frameAnimation.isRunning()){
-                progress.setImageResource(R.drawable.animmm);
-            }
-        }
-
         new Handler().postDelayed(new Runnable() {
 
             /*

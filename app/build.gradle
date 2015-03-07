@@ -26,5 +26,7 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
     compile 'com.mcxiaoke.volley:library:1.0.11'
+    compile 'com.nispok:snackbar:2.10.1'
+    compile "com.google.android.gms:play-services:3.1.+"
 
 }
