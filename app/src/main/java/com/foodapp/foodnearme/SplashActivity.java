@@ -83,6 +83,7 @@ public class SplashActivity extends ActionBarActivity implements LoginFrag.OnFra
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_splash, container, false);
+            rootView.seton
             return rootView;
         }
     }

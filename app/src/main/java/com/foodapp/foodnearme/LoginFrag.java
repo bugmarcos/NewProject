@@ -159,7 +159,7 @@ public class LoginFrag extends Fragment {
                                                 JSONObject obj = new JSONObject(response);
                                                 if(obj.getBoolean("status"))
                                                 {
-                                                    SnackbarManager.show(Snackbar.with(getActivity()).text(obj.getString("data")));
+                                                    SnackbarManager.show(Snackbar.with(getActivity()).text("success"));
                                                     getActivity().startActivity(new Intent(getActivity(),GCMRegAct.class));
                                                 }
                                                 else {
