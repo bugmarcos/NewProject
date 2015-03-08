@@ -1,5 +1,6 @@
 package com.foodapp.foodnearme;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Handler;
@@ -7,29 +8,41 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.foodapp.foodnearme.utils.UserDataUtil;
+
+import java.util.Map;
 
 
 public class SplashActivity extends ActionBarActivity implements LoginFrag.OnFragmentInteractionListener {
-
+    GestureDetector gestureDetector;
+    Runnable myrunnable;
+    Handler handler = new Handler();
+    boolean shouldLogin = true;
+    boolean shouldTouch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        gestureDetector = new GestureDetector(SplashActivity.this, new GestureListener());
         if (savedInstanceState == null) {
             getSupportActionBar().hide();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-
-        new Handler().postDelayed(new Runnable() {
+        myrunnable = new Runnable() {
 
             /*
              * Showing splash screen with a timer. This will be useful when you
@@ -38,10 +51,54 @@ public class SplashActivity extends ActionBarActivity implements LoginFrag.OnFra
 
             @Override
             public void run() {
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoginFrag(getBaseContext())).commit();
+                if(shouldLogin)
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoginFrag(getBaseContext())).commit();
+                else {
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    finish();
+                }
             }
-        }, 4000);
+        };
+        handler.postDelayed(myrunnable, 4000);
+        Map<String,String> map = (Map<String, String>) UserDataUtil.getAllData(SplashActivity.this);
+        if(map.containsKey(UserDataUtil.USER_ID) && map.get(UserDataUtil.USER_ID)!=null)
+        {
+
+            shouldLogin = false;
+            shouldTouch = true;
+        }
+        Toast.makeText(getApplicationContext(),map.size()+"",Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return gestureDetector.onTouchEvent(event);
+    }
+
+    private class GestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+        // event when double tap occurs
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            if(shouldTouch){
+                if(shouldLogin)
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoginFrag(getBaseContext())).commit();
+                else {
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    finish();
+                }
+                handler.removeCallbacks(myrunnable);
+
+            }
+
+
+            return true;
+        }
     }
 
     @Override
@@ -83,8 +140,11 @@ public class SplashActivity extends ActionBarActivity implements LoginFrag.OnFra
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_splash, container, false);
-            rootView.seton
+
+
             return rootView;
         }
+
+
     }
 }

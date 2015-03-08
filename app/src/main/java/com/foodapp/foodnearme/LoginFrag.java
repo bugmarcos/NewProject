@@ -30,6 +30,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.foodapp.foodnearme.utils.AppConstants;
 import com.foodapp.foodnearme.utils.AppController;
+import com.foodapp.foodnearme.utils.UserDataUtil;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 
@@ -161,6 +162,18 @@ public class LoginFrag extends Fragment {
                                                 {
                                                     SnackbarManager.show(Snackbar.with(getActivity()).text("success"));
                                                     getActivity().startActivity(new Intent(getActivity(),GCMRegAct.class));
+                                                    try {
+                                                        JSONObject data = new JSONObject(obj.getString("data"));
+                                                        Map<String,String> map = new HashMap<String, String>();
+                                                        map.put(UserDataUtil.USER_ID, (String) data.get("umpkey"));
+                                                        map.put(UserDataUtil.TOKEN, (String) data.get("accesstoken"));
+                                                        UserDataUtil.addToPreference(getActivity(),map);
+                                                    } catch (Exception ex)
+                                                    {
+                                                        SnackbarManager.show(Snackbar.with(getActivity()).text(obj.getString("parsing error")));
+                                                    }
+
+
                                                 }
                                                 else {
                                                     SnackbarManager.show(Snackbar.with(getActivity()).text(obj.getString("err")));

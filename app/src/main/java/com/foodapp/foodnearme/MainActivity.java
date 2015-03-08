@@ -19,10 +19,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.foodapp.foodnearme.adapter.MainRestAdapter;
+import com.foodapp.foodnearme.utils.AppConstants;
+import com.foodapp.foodnearme.utils.AppController;
 import com.foodapp.foodnearme.utils.GifDecoder;
+import com.foodapp.foodnearme.utils.UserDataUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 
@@ -147,7 +162,42 @@ public class MainActivity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            Map<String,String> map = (Map<String, String>) UserDataUtil.getAllData(getActivity());
+            final Map<String,String> params = new HashMap<>();
+            params.put("userid",map.get(UserDataUtil.USER_ID));
+            params.put("token",map.get(UserDataUtil.TOKEN));
+            params.put("action","getallrest");
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConstants.SERVER_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(getActivity(),"resp",Toast.LENGTH_LONG);
+                            try {
+                                JSONObject obj = new JSONObject(response);
+                                if(obj.getBoolean("status"))
+                                {
+                                    Toast.makeText(getActivity(),"resp status",Toast.LENGTH_LONG);
+                                    ((ListView)rootView.findViewById(R.id.allrestlist)).setAdapter(new MainRestAdapter(obj.getJSONArray("data"),getActivity()));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    },new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getActivity(),"error",Toast.LENGTH_LONG);
+                }
+            }){
+                @Override
+                protected Map<String,String> getParams(){
+
+
+                    return params;
+                }
+            };
+            AppController.getInstance().addToRequestQueue(stringRequest);
             return rootView;
         }
 
